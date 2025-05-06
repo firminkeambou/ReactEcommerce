@@ -5,7 +5,7 @@ const  Category = ({id,title,onCategoryClick}) => {
 
   return (
   <>
-    <div  id={id} onClick={onCategoryClick}>{title}</div>
+    <div  id={id} onClick={onCategoryClick}>{title} </div>
   </>
   )
 }

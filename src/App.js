@@ -52,7 +52,7 @@ function App() {
   const renderPoducts = () =>{
     
     return products.data.length>=1 ? products.data.map(p =>{ 
-      return <CategoryProduct {...p} />
+      return <CategoryProduct key={p.id} {...p}  />
      }) :<div style={{color:'red'}}>No product found</div>
   }
 

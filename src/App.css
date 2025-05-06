@@ -20,6 +20,8 @@ header{
 section{
   display: flex;
   display: -webkit-flex;
+  /*very important for height 80% viewPort height*/
+
 }
 
 nav{
@@ -71,13 +73,19 @@ aside{
 }
 
 .product-container{
+  margin-left:20px; /*this is specially useful when the viwport shrinks*/
   display: grid;
   grid-template-columns: 4fr 3fr 1fr;
   grid-template-columns:repeat(auto-fill,minmax(400px,2fr));
   gap:40px;
 }
 
-
+.button-clik {
+  cursor: pointer;
+}
+.label-clik {
+  cursor: pointer;
+}
 .category-product-title {
   /*grid-column: 1 / span 3;*/
   color: darkslategray;
@@ -85,6 +93,7 @@ aside{
   font-size: 25px;
   padding-left: 2px;
   margin-bottom: 30px;
+  margin-left: 18px;
 }
 
 .category-product-image-container{
@@ -166,10 +175,17 @@ padding-top: 5px;
   background-color: darkgray;
 }
 
+.description {
+  margin-top: 20px;
+}
 /* Rsponsive layout - makes the menu and the content (insde the section) sit on top of each other*/
 @media(max-width: 600px){
   section{
     -webkit-flex-direction: column;
     flex-direction: column;
   }
+  .category-product-info-features{
+    margin-left: 15px;
+    padding-left: 5px;
+    }
 }

@@ -1,10 +1,14 @@
 import React from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 
-const CategoryProduct = ({title,image,specs,features,price,stock,description}) => {
+const CategoryProduct = ({id,title,image,specs,features,price,stock,description}) => {
+    let navigate = useNavigate();
+    console.log(`./assets/${image}`)
   return (
     <main>
         <div className='category-product-title'>
-            {title}
+        <Link to={`products/${id}`}> {title} </Link> 
+         {/** <div className='label-clik' onClick={() => navigate(`products/${id}`)}>{title} </div>*/}   
         </div>
         <div className='product-container'>
             <figure>
@@ -27,8 +31,10 @@ const CategoryProduct = ({title,image,specs,features,price,stock,description}) =
                     <h3>Features</h3>
                      
                     <ul>
-                        {<li>{description}</li>}
-                        {features?.map( featur => <div><li> {featur}</li></div>) /** features?  means if map exist*/}
+                    {<li key='feature100'>{description}</li>}
+                        {features?.map( (featur,i) => {
+                            
+                            return <li key ={`feature${i}`}> {featur}</li>}) /** features?   means if map exist*/}
                     </ul>
                 </div>
              </aside>
@@ -42,7 +48,7 @@ const CategoryProduct = ({title,image,specs,features,price,stock,description}) =
                     <label>Free Delivery</label>
                 </div>
                 <div className='category-product-action'>
-                    <button>View Product</button>
+                    <button  className='button-clik' onClick={() => navigate(`products/${id}`)}>View Product</button>
                     <button>Add to Basket</button>
                 </div>
              </aside>
