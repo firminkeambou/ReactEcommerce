@@ -31,3 +31,7 @@ export const getProducts= (id) => {
 export const getProductById = (id) => {
     return fetcher("products/" + id)
  }
+
+export const getProductsByQuery = query => {
+    return fetcher('products?q=' + query)  // fulltext search with fake API json-server version V0.17 "?q=="
+}

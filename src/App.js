@@ -1,15 +1,26 @@
 //import logo from './logo.svg';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState ,} from 'react';
+//import { Link, Outlet } from 'react-router-dom';
 import './App.css';
+import { BrowserRouter, Routes,Route } from 'react-router-dom';
+import ProductDetails from './components/ProductDetails';
+import Basket from './components/Basket';
+import Checkout from './components/Checkout';
 import Category from './components/Category';
-import { getCategories,getProducts } from './fetcher';
-import CategoryProduct from './components/Category_product';
+import Layout from './components/layout';
+//import Category from './components/Category';
+import { getCategories } from './fetcher'; //,getProducts
+import Home from './components/Home';
+import OrderConfirmation from './components/orderconfirmation';
+
+import SearchResults from './components/searchResult';
+//import CategoryProduct from './components/Category_product';
 
 function App() {
   const [categories, setCategories] = useState({errorMessage:'' , data :[]})
-  const [products, setProducts] = useState({errorMessage:'' , data :[]})
-  const [productClicked , setProductClicked] = useState(false)
+ // const [products, setProducts] = useState({errorMessage:'' , data :[]})
+  //const [productClicked , setProductClicked] = useState(false)
 
   useEffect( () => {
     const fetchData =  async () => {
@@ -19,16 +30,16 @@ function App() {
     fetchData()
   },[])
 
-  const handleCategoryClick =  id => {
+  /*const handleCategoryClick =  id => {
     const fetchData =  async () => {
       const responseObject = await getProducts(id)
       //console.log(responseObject)
       setProducts(responseObject)
       
     }
-    setProductClicked (true)
+    //setProductClicked (true)
     fetchData()   
-  }
+  }*/
 
 
   // rendering each category as a component as we may to treat each one differently
@@ -40,44 +51,41 @@ function App() {
   } */
 
   //++++++++ rendering version 2 with a for loop
-  const renderCategories = () => {
-    let catFinal=[]
-    for (let i=0; i< categories.data.length; i++){
-      let cat = categories.data[i]
-      catFinal.push(<Category onCategoryClick={() => handleCategoryClick(cat.id)} key={cat.id} id={cat.id} title={cat.title}/>)
-     }
-     return catFinal
-  }
+  /*
+        const renderCategories = () => {
+          let catFinal=[]
+          for (let i=0; i< categories.data.length; i++){
+            let cat = categories.data[i]
+            catFinal.push(<Category onCategoryClick={() => handleCategoryClick(cat.id)} key={cat.id} id={cat.id} title={cat.title}/>)
+          }
+          return catFinal
+        } 
+    */
+   //++++++++ rendering version 3 using react router ( the way to go)
 
-  const renderPoducts = () =>{
-    
-    return products.data.length>=1 ? products.data.map(p =>{ 
-      return <CategoryProduct key={p.id} {...p}  />
-     }) :<div style={{color:'red'}}>No product found</div>
-  }
-
+// <Route index element={<Home />} />   == "index" here means  first component to be loaded in React Router
   return (
     <>
 
-    <header> My Store</header>
-
-    <section>
-      <nav>
-        {categories.errorMessage && <div> Error: {categories.errorMessage}</div>}
-        {categories.data && renderCategories() /*stands for if (categories!== undefined) then renderCategories()*/}
-      </nav>
-      <article>
-        <h1> Products </h1>
-        {products.errorMessage && <div> Error: {products.errorMessage}</div>}
-
-        { products.data && productClicked  && renderPoducts()  /*stands for if (products exist) then renderProducts()*/}
-
-      </article>
-    </section>
-    <footer>
-      footer
-    </footer>
-    
+<BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Layout categories={categories}/> } > 
+          <Route index element={<Home />} />
+          <Route path='basket' element={<Basket />}/>
+          <Route path='checkout' element={<Checkout />}/>
+          <Route path='orderconfirmation' element={<OrderConfirmation />}></Route>
+          <Route path='search' element={<SearchResults />}/>
+          <Route
+               path='products/:productId' 
+               element={<ProductDetails />}
+           />
+          <Route 
+              path='categories/:categoryId'
+              element={<Category />}
+           />
+        </Route>
+      </Routes>  
+  </BrowserRouter>
     </>
   );
 }

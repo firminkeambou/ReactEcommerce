@@ -14,7 +14,7 @@
           "image" : "mercedezBenz1.jpg",
           "price" : 4672222,
           "sku" : "87042",
-          "description" : "Vhicules utilitaires disel d'1 poids total en charge maximal <= 5 tonnes HILUX PICK UP   DR N6CMDI021",
+          "description" : "Vhicules utilitaires <strong> diesel d'1 poids total en charge maximal <= 5 tonnes </strong> HILUX PICK UP   DR N6CMDI021",
           "specs" : {"dimensions":"0 + 0 + 0 + 0 - 0", "capacity":"1870 litres"},
           "features" : ["VEHICULE","TOYOTA","CH 010652"],
           "stock" : 7

@@ -15,8 +15,15 @@ const ProductDetails = () => {
       setProduct(responseObject);
     }
     fetchData()
-  },[productId])
-      
+  },[productId]);
+
+  //the below function allows us to intepret html code from a text especially "product.data?.description"
+  const interpretMarkup = () => {
+    return {__html:product.data?.description}
+  }
+//<div   className='description'>{product.data?.description}</div>   "becomes"
+
+//<div  dangerouslySetInnerHTML={interpretMarkup()} className='description'></div>
   return (
     <main>
         
@@ -68,7 +75,7 @@ const ProductDetails = () => {
                     </div>
                  </aside>
            </div>
-           <div className='description'>{product.data?.description}</div>
+           <div  dangerouslySetInnerHTML={interpretMarkup()} className='description'></div>
            
         </main>
   )
